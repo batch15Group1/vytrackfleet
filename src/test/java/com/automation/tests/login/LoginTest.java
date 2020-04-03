@@ -1,12 +1,12 @@
 package com.automation.tests.login;
 
 import com.automation.pages.LoginPage;
-import com.automation.tests.vytrack.AbstractTestBase;
+import com.automation.tests.AbstractTestBase;
 import com.automation.utilities.Driver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class NewLoginTest extends AbstractTestBase {
+public class LoginTest extends AbstractTestBase {
 
     @Test
     public void verifyPageTitle(){
