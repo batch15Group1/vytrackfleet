@@ -1,4 +1,4 @@
-package com.automation.pages;
+package com.automation.pages.login;
 
 import com.automation.utilities.BrowserUtils;
 import com.automation.utilities.ConfigurationReader;

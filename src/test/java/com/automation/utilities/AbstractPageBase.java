@@ -1,4 +1,4 @@
-package com.automation.pages;
+package com.automation.utilities;
 import com.automation.utilities.BrowserUtils;
 import com.automation.utilities.Driver;
 import org.openqa.selenium.By;

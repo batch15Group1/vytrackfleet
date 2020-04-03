@@ -1,7 +1,7 @@
 package com.automation.tests.login;
 
-import com.automation.pages.LoginPage;
-import com.automation.tests.AbstractTestBase;
+import com.automation.pages.login.LoginPage;
+import com.automation.utilities.AbstractTestBase;
 import com.automation.utilities.Driver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
