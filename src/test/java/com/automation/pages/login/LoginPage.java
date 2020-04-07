@@ -12,7 +12,6 @@ public class LoginPage {
 
     @FindBy(id = "prependedInput")
     private WebElement username;
-//    public WebElement username2 = Driver.getDriver().findElement(By.id("prependedInput"));
 
     @FindBy(id = "prependedInput2")
     private WebElement password;
@@ -26,10 +25,12 @@ public class LoginPage {
     @FindBy (css= "[class='alert alert-error']")
     private WebElement warningMessage;
 
+    /*
+     to connect our webDriver, page class and page factory
+     PageFactory - used to use @FindBy annotations
+     PageFactory - helps to find elements easier
+     */
     public LoginPage() {
-        //to connect our webdriver, page class and page factory
-        //PageFactory - used to use @FindBy annotations
-        //PageFactory - helps to find elements easier
         PageFactory.initElements(Driver.getDriver(), this);
     }
 

@@ -31,7 +31,9 @@ public class Driver {
 
                 case "chrome":
                     WebDriverManager.chromedriver().version("79").setup();
-                    driver = new ChromeDriver();
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    chromeOptions.addArguments("--start-maximized");
+                    driver = new ChromeDriver(chromeOptions);
                     break;
 
                 case "chromeHeadless":
