@@ -24,7 +24,9 @@ public abstract class AbstractPageBase {
     @FindBy (css = "#user-menu > a")
     protected WebElement currentUser;
 
-    public AbstractPageBase() { PageFactory.initElements(driver, this); }
+    public AbstractPageBase() {
+        PageFactory.initElements(driver, this);
+    }
 
     public String getCurrentUserName (){
         BrowserUtils.waitForPageToLoad(10);

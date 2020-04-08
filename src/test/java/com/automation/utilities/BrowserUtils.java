@@ -18,7 +18,6 @@ public class BrowserUtils {
 
     /**
      * Pause test for some time
-     *
      * @param seconds
      */
     public static void wait(int seconds) {
@@ -43,7 +42,6 @@ public class BrowserUtils {
     }
     /**
      * waits for backgrounds processes on the browser to complete
-     *
      * @param timeOutInSeconds
      */
     public static void waitForPageToLoad(long timeOutInSeconds) {
@@ -57,7 +55,6 @@ public class BrowserUtils {
     }
     /**
      * Clicks on an element using JavaScript
-     *
      * @param element
      */
     public static void clickWithJS(WebElement element) {
@@ -66,7 +63,6 @@ public class BrowserUtils {
     }
     /**
      * Scroll to element using JavaScript
-     *
      * @param element
      */
     public static void scrollTo(WebElement element) {
@@ -88,8 +84,7 @@ public class BrowserUtils {
         }
         System.out.println("OS name: " + System.getProperty("os.name"));
         System.out.println("Screenshot is here: " + path);
-        //since our reference type is a WebDriver
-        //we cannot see methods from TakesScreenshot interface
+        //since our reference type is a WebDriver we cannot see methods from TakesScreenshot interface
         //that's why do casting
         TakesScreenshot takesScreenshot = (TakesScreenshot) Driver.getDriver();
         //take screenshot of web browser, and save it as a file
