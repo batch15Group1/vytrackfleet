@@ -52,7 +52,7 @@ public abstract class AbstractTestBase {
     public void teardown(ITestResult iTestResult) throws IOException {
         //ITestResult class describes the result of a test.
         //if test failed, take a screenshot
-        if (iTestResult.getStatus() == ITestResult.FAILURE) {
+        if (iTestResult.getStatus() == ITestResult.FAILURE ) {
             //screenshot will have a name of the test
             String screenshotPath = BrowserUtils.getScreenshot(iTestResult.getName());
             test.fail(iTestResult.getName());//attach test name that failed
