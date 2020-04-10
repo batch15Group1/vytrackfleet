@@ -1,4 +1,4 @@
-package com.automation.pages.fleet;
+package com.automation.pages.fleet.vehiclesModel;
 
 import com.automation.utilities.AbstractPageBase;
 import org.openqa.selenium.By;
