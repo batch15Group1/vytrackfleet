@@ -60,4 +60,10 @@ public class LoginPage {
         password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
         BrowserUtils.wait(3);
     }
+
+    public void loginforDriver(){
+        username.sendKeys(ConfigurationReader.getProperty("driver"));
+        password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
+        BrowserUtils.wait(3);
+    }
 }
