@@ -1,4 +1,4 @@
 package com.automation.pages.activities;
 
-public class CalendarEventsPage {
+public class CallsPage {
 }
