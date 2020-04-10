@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 public class CreateVehiclesModelPage extends AbstractPageBase {
-    private String filePath = "/Users/isikdurmus/Desktop/pic.jpg";
     @FindBy(css = "[id^='custom_entity_type_ModelName-uid']")
     private WebElement modelName;
 
@@ -42,6 +41,13 @@ public class CreateVehiclesModelPage extends AbstractPageBase {
     @FindBy(css = "[id^='custom_entity_type_Vendors-uid']")
     private WebElement vendors;
 
+    @FindBy(css = "[class^='btn btn-success action-button']")
+    private WebElement saveAndCloseBtn;
+
+    public void clickOnSaveAndCloseBtn(){
+        BrowserUtils.waitForPageToLoad(20);
+        wait.until(ExpectedConditions.elementToBeClickable(saveAndCloseBtn)).click();
+    }
     public void enterModelName(String modelNameValue) {
         BrowserUtils.waitForPageToLoad(20);
         wait.until(ExpectedConditions.visibilityOf(modelName)).sendKeys(modelNameValue);
@@ -67,7 +73,7 @@ public class CreateVehiclesModelPage extends AbstractPageBase {
         wait.until(ExpectedConditions.visibilityOf(catalogValue)).sendKeys(catalogValueVal);
     }
 
-    public void enterco2Fee(String co2FeeValue){
+    public void enterCo2Fee(String co2FeeValue){
         BrowserUtils.waitForPageToLoad(20);
         wait.until(ExpectedConditions.visibilityOf(co2Fee)).sendKeys(co2FeeValue);
     }
