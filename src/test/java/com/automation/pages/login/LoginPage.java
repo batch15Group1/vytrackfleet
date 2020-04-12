@@ -60,4 +60,22 @@ public class LoginPage {
         password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
         BrowserUtils.wait(3);
     }
+
+    public void loginAsDriver(){
+        username.sendKeys(ConfigurationReader.getProperty("driver"));
+        password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
+        BrowserUtils.wait(3);
+    }
+
+    public void loginAsSalesManager(){
+        username.sendKeys(ConfigurationReader.getProperty("sales_manager"));
+        password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
+        BrowserUtils.wait(3);
+    }
+
+    public void loginAsStoreManager(){
+        username.sendKeys(ConfigurationReader.getProperty("store_manager"));
+        password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
+        BrowserUtils.wait(3);
+    }
 }

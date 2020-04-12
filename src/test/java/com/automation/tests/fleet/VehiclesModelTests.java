@@ -4,7 +4,10 @@ import com.automation.pages.fleet.vehiclesModel.CreateVehiclesModelPage;
 import com.automation.pages.fleet.vehiclesModel.VehiclesModelPage;
 import com.automation.pages.login.LoginPage;
 import com.automation.utilities.AbstractTestBase;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.Assert;
+
 
 public class VehiclesModelTests extends AbstractTestBase {
 LoginPage loginPage= new LoginPage();
@@ -28,9 +31,9 @@ CreateVehiclesModelPage createVehiclesModelPage= new CreateVehiclesModelPage();
     }
 
     @Test
-    public void storeManagerCanCreateVehicleModel(){
+    public void storeManagerCanCreateVehicleModel() {
         test = report.createTest("Verify store manager can create a vehicle model");
-        loginPage.login("storemanager51","UserUser123");
+        loginPage.login("storemanager51", "UserUser123");
         vehiclesModelPage.navigateTo("Fleet", "Vehicles Model");
         vehiclesModelPage.clickOnCreateVehiclesModelBtn();
         createVehiclesModelPage.enterModelName("camry");
@@ -45,7 +48,30 @@ CreateVehiclesModelPage createVehiclesModelPage= new CreateVehiclesModelPage();
         createVehiclesModelPage.selectFuelType("Diesel");
         createVehiclesModelPage.enterVendors("dealer");
         createVehiclesModelPage.clickOnSaveAndCloseBtn();
+    }
+
+        @Test(dataProvider = "credential")
+        public void accessToVehicleModelPage (String module, String subModule){
+
+            LoginPage loginPage = new LoginPage();
+            loginPage.login();
+            VehiclesModelPage vehiclesModelPage = new VehiclesModelPage();
+            vehiclesModelPage.navigateTo("Fleet", "Vehicles Model");
+
+            Assert.assertTrue(vehiclesModelPage.getSubTitle().isDisplayed());
+        }
+
+
+        @DataProvider
+        public Object[][] credential () {
+            return new Object[][]{
+                    {"storemanager51", "UserUser123"},
+                    {"salesmanager101", "UserUser123"},
+                    {"user1", "UserUser123"}
+            };
+        }
 
     }
 
-}
+
+
