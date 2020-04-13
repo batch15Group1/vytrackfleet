@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VehiclesModelPage extends AbstractPageBase {
 
-    @FindBy(className = "pull-right title-buttons-container")
+    @FindBy(linkText = "Create Vehicles Model")
     private WebElement createVehiclesModelBtn;
 
     @FindBy(xpath = "(//h1)[2]")
