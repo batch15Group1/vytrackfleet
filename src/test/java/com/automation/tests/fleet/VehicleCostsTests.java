@@ -28,5 +28,19 @@ public class VehicleCostsTests extends AbstractTestBase {
         Assert.assertEquals(actualResult,expectedResult);
 
         }
+        //US2/AC2/TC1
+        @Test
+    public void createNewCost() throws InterruptedException {
+            LoginPage loginPage = new LoginPage();
+            VehicleCostsPage vehicleCostsPage = new VehicleCostsPage();
+
+            loginPage.login("User1","UserUser123");
+            vehicleCostsPage.navigateTo("Fleet","Vehicle Costs");
+
+            wait();
+vehicleCostsPage.clickToCreateVehicleCost();
+            wait();
+vehicleCostsPage.putTheCostInfo();
+        }
     }
 
