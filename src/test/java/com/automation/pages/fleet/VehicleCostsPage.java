@@ -28,8 +28,6 @@ public class VehicleCostsPage extends AbstractPageBase {
         WebDriverWait wait =new WebDriverWait(driver,10);
         wait.until(ExpectedConditions.elementToBeClickable(createVehicleCost)).click();
     }
-public void setActualResult() {
-}
 
 
 
