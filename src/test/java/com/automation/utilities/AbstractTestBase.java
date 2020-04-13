@@ -44,7 +44,7 @@ public abstract class AbstractTestBase {
     public void setup() {
         String URL = ConfigurationReader.getProperty("qa2");
         Driver.getDriver().get(URL);
-        Driver.getDriver().manage().window().maximize();
+//        Driver.getDriver().manage().window().maximize();
         wait = new WebDriverWait(Driver.getDriver(), 15);
         actions = new Actions(Driver.getDriver());
     }

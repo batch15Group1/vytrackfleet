@@ -11,37 +11,37 @@ public class CreateVehiclesModelPage extends AbstractPageBase {
     @FindBy(css = "[id^='custom_entity_type_ModelName-uid']")
     private WebElement modelName;
 
-    @FindBy(css = "[id^='custom_entity_type_make-uid']")
+    @FindBy(css = "[name='custom_entity_type[Make]']")
     private WebElement make;
 
-    @FindBy(css = "[id^='select2-drop-mask']")
+    @FindBy(css = "[name='custom_entity_type[Canberequested]']")
     private WebElement canBeRequested;
 
-    @FindBy(css = "[id^='custom_entity_type_Logo_file-uid']")
+    @FindBy(xpath = "//*[@type='file' and @name='custom_entity_type[Logo][file]']")
     private WebElement logo;
 
-    @FindBy(css = "[id^='custom_entity_type_CatalogValue-uid']")
+    @FindBy(css = "[name='custom_entity_type[CatalogValue]']")
     private WebElement catalogValue;
 
-    @FindBy(css = "[id^='custom_entity_type_CO2Fee-uid']")
+    @FindBy(css = "[name='custom_entity_type[CO2Fee]']")
     private WebElement co2Fee;
 
-    @FindBy(css = "[id^='custom_entity_type_Cost-uid']")
+    @FindBy(css = "[name='custom_entity_type[Cost]']")
     private WebElement cost;
 
-    @FindBy(css = "[id^='custom_entity_type_TotalCost-uid']")
+    @FindBy(css = "[name='custom_entity_type[TotalCost]']")
     private WebElement totalCost;
 
-    @FindBy(css = "[id^='custom_entity_type_CO2Emissions-uid']")
+    @FindBy(css = "[name='custom_entity_type[CO2Emissions]']")
     private WebElement co2Emission;
 
-    @FindBy(css = "[id^='s2id_custom_entity_type_FuelType-uid']")
+    @FindBy(css = "[name='custom_entity_type[FuelType]']")
     private WebElement fuelType;
 
-    @FindBy(css = "[id^='custom_entity_type_Vendors-uid']")
+    @FindBy(css = "[name='custom_entity_type[Vendors]']")
     private WebElement vendors;
 
-    @FindBy(css = "[class^='btn btn-success action-button']")
+    @FindBy(css = "[class='btn btn-success action-button']")
     private WebElement saveAndCloseBtn;
 
     public void clickOnSaveAndCloseBtn(){
@@ -60,8 +60,8 @@ public class CreateVehiclesModelPage extends AbstractPageBase {
 
     public void selectCanBeRequested(String yesNo) {
         BrowserUtils.waitForPageToLoad(20);
-        Select selectCanBeRequested = new Select(canBeRequested);
-        selectCanBeRequested.selectByVisibleText(yesNo);
+        Select slctCanBeRequested = new Select(canBeRequested);
+        slctCanBeRequested.selectByVisibleText(yesNo);
     }
 
     public void uploadLogo(String filePath) {
