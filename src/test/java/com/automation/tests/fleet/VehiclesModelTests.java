@@ -10,28 +10,31 @@ import org.testng.Assert;
 
 
 public class VehiclesModelTests extends AbstractTestBase {
-LoginPage loginPage= new LoginPage();
 VehiclesModelPage vehiclesModelPage = new VehiclesModelPage();
 CreateVehiclesModelPage createVehiclesModelPage= new CreateVehiclesModelPage();
 
-    @Test
-    public void storeManagerAccessVehiclesModel(){
-    test = report.createTest("Verify access to VehiclesModel page");
-    loginPage.login("storemanager51","UserUser123");
-    vehiclesModelPage.navigateTo("Fleet", "Vehicles Model");
-    test.pass("Store manager access is verified");
+    @Test(dataProvider = "credential")
+    public void accessToVehicleModelPage (String module, String subModule){
+        LoginPage loginPage = new LoginPage();
+        loginPage.login();
+        VehiclesModelPage vehiclesModelPage = new VehiclesModelPage();
+        vehiclesModelPage.navigateTo("Fleet", "Vehicles Model");
+
+        Assert.assertTrue(vehiclesModelPage.getSubTitle().isDisplayed());
     }
 
-    @Test
-    public void salesManagerAccessVehiclesModel(){
-        test = report.createTest("Verify access to VehiclesModel page");
-        loginPage.login("salesmanager101","UserUser123");
-        vehiclesModelPage.navigateTo("Fleet", "Vehicles Model");
-        test.pass("Sales manager access is verified");
+    @DataProvider
+    public Object[][] credential () {
+        return new Object[][]{
+                {"storemanager51", "UserUser123"},
+                {"salesmanager101", "UserUser123"},
+                {"user1", "UserUser123"}
+        };
     }
 
     @Test
     public void storeManagerCanCreateVehicleModel() {
+        LoginPage loginPage= new LoginPage();
         test = report.createTest("Verify store manager can create a vehicle model");
         loginPage.login("storemanager51", "UserUser123");
         vehiclesModelPage.navigateTo("Fleet", "Vehicles Model");
@@ -39,7 +42,7 @@ CreateVehiclesModelPage createVehiclesModelPage= new CreateVehiclesModelPage();
         createVehiclesModelPage.enterModelName("camry");
         createVehiclesModelPage.enterMake("toyota");
         createVehiclesModelPage.selectCanBeRequested("Yes");
-        createVehiclesModelPage.uploadLogo("/Users/isikdurmus/Desktop/pic.jpg");
+//        createVehiclesModelPage.uploadLogo("/Users/isikdurmus/Desktop/pic.jpg");
         createVehiclesModelPage.enterCatalogValue("12000");
         createVehiclesModelPage.enterCo2Fee("200");
         createVehiclesModelPage.enterCost("120");
@@ -48,28 +51,10 @@ CreateVehiclesModelPage createVehiclesModelPage= new CreateVehiclesModelPage();
         createVehiclesModelPage.selectFuelType("Diesel");
         createVehiclesModelPage.enterVendors("dealer");
         createVehiclesModelPage.clickOnSaveAndCloseBtn();
+        test.pass("Successfully created a new vehicle model");
     }
 
-        @Test(dataProvider = "credential")
-        public void accessToVehicleModelPage (String module, String subModule){
 
-            LoginPage loginPage = new LoginPage();
-            loginPage.login();
-            VehiclesModelPage vehiclesModelPage = new VehiclesModelPage();
-            vehiclesModelPage.navigateTo("Fleet", "Vehicles Model");
-
-            Assert.assertTrue(vehiclesModelPage.getSubTitle().isDisplayed());
-        }
-
-
-        @DataProvider
-        public Object[][] credential () {
-            return new Object[][]{
-                    {"storemanager51", "UserUser123"},
-                    {"salesmanager101", "UserUser123"},
-                    {"user1", "UserUser123"}
-            };
-        }
 
     }
 
