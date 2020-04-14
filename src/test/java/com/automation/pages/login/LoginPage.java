@@ -1,5 +1,6 @@
 package com.automation.pages.login;
 
+import com.automation.utilities.AbstractPageBase;
 import com.automation.utilities.BrowserUtils;
 import com.automation.utilities.ConfigurationReader;
 import com.automation.utilities.Driver;
@@ -8,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+public class LoginPage extends AbstractPageBase {
 
     @FindBy(id = "prependedInput")
     private WebElement username;
@@ -56,6 +57,24 @@ public class LoginPage {
      * Credentials will be retrieved from configuration.properties file
      */
     public void login(){
+        username.sendKeys(ConfigurationReader.getProperty("store_manager"));
+        password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
+        BrowserUtils.wait(3);
+    }
+
+    public void loginAsDriver(){
+        username.sendKeys(ConfigurationReader.getProperty("driver"));
+        password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
+        BrowserUtils.wait(3);
+    }
+
+    public void loginAsSalesManager(){
+        username.sendKeys(ConfigurationReader.getProperty("sales_manager"));
+        password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
+        BrowserUtils.wait(3);
+    }
+
+    public void loginAsStoreManager(){
         username.sendKeys(ConfigurationReader.getProperty("store_manager"));
         password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
         BrowserUtils.wait(3);
