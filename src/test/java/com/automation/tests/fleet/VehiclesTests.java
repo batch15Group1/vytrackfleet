@@ -47,4 +47,18 @@ public class VehiclesTests extends AbstractTestBase {
 
         test.pass("General information is verified! ");
     }
+
+    // #US1_AC2
+    @Test(description = "driver can add Event and it should display under Activity tab and General information page as well")
+    public void createEvent(){
+        LoginPage loginPage = new LoginPage();
+        VehiclesPage vehiclesPage = new VehiclesPage();
+        loginPage.loginAsDriver();
+        vehiclesPage.navigateTo("Fleet", "Vehicles");
+        vehiclesPage.randomlySelectACar();
+        vehiclesPage.clickAddEvent();
+        vehiclesPage.enterTitle("Meeting");
+        vehiclesPage.enterDescription("Meeting request with sales manager James Bob");
+    }
+
 }

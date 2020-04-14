@@ -8,6 +8,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -20,8 +21,7 @@ public class VehiclesPage extends AbstractPageBase {
           AC's
           1.Verify that truck driver should be able to see all Vehicle information once navigate to Vehicle page.
           2.Verify that when user click on any car on the grid , system should display general information about the car
-          3.Verify that truck driver can add Event and it should display under Activity tab and General
-          information page as well .
+          3.Verify that truck driver can add Event and it should display under Activity tab and General information page as well .
           4.Verify that Truck driver can reset the Grid by click on Grid setting"
 
       User Story 2
@@ -37,7 +37,6 @@ public class VehiclesPage extends AbstractPageBase {
 
 
     /*  #US1_AC1
-
     Verify that truck driver should be able to see all Vehicle information once navigate to Vehicle page
     login - go to fleet then - vehicles page
     click on grid settings
@@ -56,8 +55,15 @@ public class VehiclesPage extends AbstractPageBase {
      */
 
     /* #US1_AC3
-    Verify that truck driver can add Event and it should display under Activity tab and General
-
+    Verify that truck driver can add Event and it should display under Activity tab and General information page as well
+    login - go to fleet then - vehicles page
+    randomly select a page number from total page number - then randomly click a car on that page (we will use this method from ac 2)
+    click on add event
+    enter title - description - choose guests - add reminders - choose context - choose owner
+    type organizer display name - type organizer email - choose start and end date -
+    click on save
+    click on general page - verify that you see the event
+    click on activity page - verify that you see the event
      */
 
     //**** #US1_AC1 ****
@@ -88,11 +94,30 @@ public class VehiclesPage extends AbstractPageBase {
     private WebElement generalInfo;
 
 
+    //**** #US1_AC3 ****
+
+    @FindBy(xpath = "//a[text()=\"Add Event\"]")
+    private WebElement addEventBtn;
+
+    @FindBy(css = "[id^=\"oro_calendar_event_form_title-uid\"]")
+    private WebElement titleTextBox;
+
+    @FindBy(css = "iframe[id^=\"oro_calendar_event_form_description-uid\"]")
+    private WebElement descriptionIframe;
+
+    @FindBy(id = "tinymce")
+    private WebElement descriptionTextArea;
+
+
+
+
+
     //**** #US1_AC1 ****
     public void clickOnGridSettings() {
         BrowserUtils.waitForPageToLoad(20);
         wait.until(ExpectedConditions.elementToBeClickable(gridSettingsBtn)).click();
     }
+
     public void clickSelectAll() {
         BrowserUtils.waitForPageToLoad(20);
         wait.until(ExpectedConditions.elementToBeClickable(selectAllBtn)).click();
@@ -100,6 +125,7 @@ public class VehiclesPage extends AbstractPageBase {
 
     /**
      * To get all vehicle information from grid settings to be able to compare, Assertion
+     *
      * @return Set<String>
      */
     public Set<String> getAllVehicleInfoNamesFromGrid() {
@@ -158,10 +184,37 @@ public class VehiclesPage extends AbstractPageBase {
         wait.until(ExpectedConditions.elementToBeClickable(carsOnCurrentPage.get(carIndexNum)));
         carsOnCurrentPage.get(carIndexNum).click();
     }
+
     //to get "General Information" text
     public String getInfoText() {
         BrowserUtils.waitForPageToLoad(10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("h5")));
         return generalInfo.getText();
     }
+
+    //**** #US1_AC3 ****
+    public void clickAddEvent(){
+        BrowserUtils.waitForPageToLoad(10);
+        wait.until(ExpectedConditions.elementToBeClickable(addEventBtn)).click();
+    }
+
+    public void enterTitle(String title){
+        BrowserUtils.waitForPageToLoad(10);
+        wait.until(ExpectedConditions.elementToBeClickable(titleTextBox)).sendKeys(title);
+    }
+
+    public void enterDescription(String description){
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(descriptionIframe));
+        descriptionTextArea.sendKeys(description);
+
+    }
+
+
+
+
+
+
+
+
+
 }
