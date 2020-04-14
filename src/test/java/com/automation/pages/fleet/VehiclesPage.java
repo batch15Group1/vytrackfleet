@@ -37,6 +37,7 @@ public class VehiclesPage extends AbstractPageBase {
 
 
     /*  #US1_AC1
+
     Verify that truck driver should be able to see all Vehicle information once navigate to Vehicle page
     login - go to fleet then - vehicles page
     click on grid settings
