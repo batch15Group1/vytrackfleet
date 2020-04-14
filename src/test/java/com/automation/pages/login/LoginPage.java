@@ -19,6 +19,7 @@ public class LoginPage {
     @FindBy(id = "_submit")
     private WebElement login;
 
+
     @FindBy(linkText = "Forgot your password?")
     private WebElement forgotPassword;
 
