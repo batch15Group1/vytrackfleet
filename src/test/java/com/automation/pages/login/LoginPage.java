@@ -20,6 +20,7 @@ public class LoginPage extends AbstractPageBase {
     @FindBy(id = "_submit")
     private WebElement login;
 
+
     @FindBy(linkText = "Forgot your password?")
     private WebElement forgotPassword;
 

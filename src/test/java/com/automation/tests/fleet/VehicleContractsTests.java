@@ -60,4 +60,12 @@ public class VehicleContractsTests extends AbstractTestBase {
         test.pass("As an unauthorized user, driver is not able to reached the Create Vehicle Contract page");
 
     }
+
+    @Test
+    public void verifyStoreManagerLogin(){
+
+        LoginPage loginPage = new LoginPage();
+        loginPage.login("storemanager51", "UserUser123");
+
+    }
 }
