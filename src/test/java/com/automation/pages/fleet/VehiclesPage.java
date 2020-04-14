@@ -206,7 +206,7 @@ public class VehiclesPage extends AbstractPageBase {
     public void enterDescription(String description){
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(descriptionIframe));
         descriptionTextArea.sendKeys(description);
-
+        driver.switchTo().defaultContent();
     }
 
 
