@@ -32,4 +32,23 @@ public class VehicleContractsPage extends AbstractPageBase {
     }
 
 
+
+
+
+    /**
+     * US1##
+     * 1. Verify that only authorized user should be able to access vehicle contract. (Note: authorized users: store manager
+     * and sales manager)
+     *
+     * 2. Verify that non authorized user should not be able to access vehicle contract. (Note: Truck driver is unauthorized)
+     */
+
+
+
+
+
+
+
+
+
 }

@@ -1,4 +1,5 @@
 package com.automation.tests.customers;
 
-public class ContactsTests {
+ class ContactsTest {
+
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.HashSet;
 import java.util.List;
@@ -66,6 +67,15 @@ public class VehiclesPage extends AbstractPageBase {
     click on activity page - verify that you see the event
      */
 
+    /*#US1_AC4
+    4.Verify that Truck driver can reset the Grid by click on Grid setting"
+    login - go to fleet - then vehicles page
+    verify view per page number is 25
+    click on view per page choose 100
+    then verify the number is 100,
+    then click on reset and verify number is 25
+     */
+
     //**** #US1_AC1 ****
     @FindBy(css = "[class='column-manager dropdown']")
     private WebElement gridSettingsBtn;
@@ -108,6 +118,26 @@ public class VehiclesPage extends AbstractPageBase {
     @FindBy(id = "tinymce")
     private WebElement descriptionTextArea;
 
+    @FindBy(className = "color")
+    private List<WebElement> colors;
+
+    @FindBy(css = "[id^=\"s2id_oro_calendar_event_form_attendees-uid\"]")
+    private WebElement guestTextBox;
+
+    @FindBy(id = "oro_calendar_event_form_reminders-uid-5e95fa15e7450_collection")
+    private WebElement addRemainderBtn;
+
+    @FindBy(css = "[class=\"btn add-list-item\"]")
+    private WebElement addRemainderEmailBtn;
+
+    @FindBy(className = "number inline-field")
+    private WebElement numberInlineBox;
+
+    @FindBy(className = "unit inline-field")
+    private WebElement unitInlineBox;
+
+    @FindBy(xpath = "//*[text()='Save']")
+    private WebElement savebtn;
 
 
 
@@ -197,17 +227,44 @@ public class VehiclesPage extends AbstractPageBase {
         BrowserUtils.waitForPageToLoad(10);
         wait.until(ExpectedConditions.elementToBeClickable(addEventBtn)).click();
     }
-
     public void enterTitle(String title){
         BrowserUtils.waitForPageToLoad(10);
         wait.until(ExpectedConditions.elementToBeClickable(titleTextBox)).sendKeys(title);
     }
-
     public void enterDescription(String description){
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(descriptionIframe));
         descriptionTextArea.sendKeys(description);
+        BrowserUtils.wait(3);
         driver.switchTo().defaultContent();
+        BrowserUtils.wait(2);
     }
+    public void selectARandomColor(){
+        Random random = new Random();
+        BrowserUtils.wait(2);
+        int colorIndex = random.nextInt(colors.size());
+        BrowserUtils.wait(2);
+        colors.get(colorIndex).click();
+        BrowserUtils.wait(3);
+    }
+    public void addGuestName(){
+        BrowserUtils.wait(3);
+        wait.until(ExpectedConditions.elementToBeClickable(guestTextBox)).sendKeys("test guest", Keys.ENTER);
+    BrowserUtils.wait(2);
+    }
+    public void addRemainder(){
+        BrowserUtils.wait(2);
+        addRemainderBtn.click();
+        Select select = new Select(addRemainderEmailBtn);
+        select.selectByVisibleText("Email");
+        wait.until(ExpectedConditions.elementToBeClickable(numberInlineBox)).sendKeys("2");
+
+        Select select1 = new Select(unitInlineBox);
+        select1.selectByVisibleText("days");
+    }
+    public void clickToSave(){
+        wait.until(ExpectedConditions.elementToBeClickable(savebtn)).click();
+    }
+
 
 
 
