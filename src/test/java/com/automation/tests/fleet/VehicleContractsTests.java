@@ -49,7 +49,7 @@ public class VehicleContractsTests extends AbstractTestBase {
         test = report.createTest("Driver - Vehicle Contract page - Alert message");
 
         LoginPage loginPage=new LoginPage();
-        loginPage.login();
+        loginPage.loginforDriver();
 
         VehicleContractsPage vContractPage=new VehicleContractsPage();
         vContractPage.navigateTo("Fleet","Vehicle Contracts");
@@ -58,6 +58,14 @@ public class VehicleContractsTests extends AbstractTestBase {
         Assert.assertEquals(actual,expected);
 
         test.pass("As an unauthorized user, driver is not able to reached the Create Vehicle Contract page");
+
+    }
+
+    @Test
+    public void verifyStoreManagerLogin(){
+
+        LoginPage loginPage = new LoginPage();
+        loginPage.login("storemanager51", "UserUser123");
 
     }
 }
