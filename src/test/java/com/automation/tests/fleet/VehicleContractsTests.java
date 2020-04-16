@@ -49,7 +49,7 @@ public class VehicleContractsTests extends AbstractTestBase {
         test = report.createTest("Driver - Vehicle Contract page - Alert message");
 
         LoginPage loginPage=new LoginPage();
-        loginPage.loginforDriver();
+        loginPage.loginAsDriver();
 
         VehicleContractsPage vContractPage=new VehicleContractsPage();
         vContractPage.navigateTo("Fleet","Vehicle Contracts");
