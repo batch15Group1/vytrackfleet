@@ -20,7 +20,7 @@ public class VehicleServicesLogsTests extends AbstractTestBase {
     @Test
     public void verifyTruckdriverSeeAllVehicleServicesLogs() {
         LoginPage loginPage = new LoginPage();
-        loginPage.loginforDriver();
+        loginPage.login();
         VehicleServicesLogsPage vehicleServicesLogsPage = new VehicleServicesLogsPage();
         vehicleServicesLogsPage.navigateTo("Fleet", "Vehicle Services Logs");
 
@@ -42,7 +42,7 @@ public class VehicleServicesLogsTests extends AbstractTestBase {
     @Test
     public void verifyTruckDriverCreateVehicleServiceLogsORCancel(){
         LoginPage loginPage = new LoginPage();
-        loginPage.loginforDriver();
+        loginPage.login();
 
         VehicleServicesLogsPage vehicleServicesLogsPage = new VehicleServicesLogsPage();
         vehicleServicesLogsPage.navigateTo("Fleet", "Vehicle Services Logs");
@@ -70,7 +70,7 @@ public class VehicleServicesLogsTests extends AbstractTestBase {
 @Test
     public void verifyDuringTheCreationServiceTypeDropDownDisplay(){
     LoginPage loginPage = new LoginPage();
-    loginPage.loginforDriver();
+    loginPage.login();
 
     VehicleServicesLogsPage vehicleServicesLogsPage = new VehicleServicesLogsPage();
     vehicleServicesLogsPage.navigateTo("Fleet", "Vehicle Services Logs");
