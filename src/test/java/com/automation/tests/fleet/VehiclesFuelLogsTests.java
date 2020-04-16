@@ -34,7 +34,7 @@ public class VehiclesFuelLogsTests extends AbstractTestBase {
         test.pass("Page title Dashboard was verified");
 
         VehiclesFuelLogsPage vehiclesFuelLogsPage = new VehiclesFuelLogsPage();
-      //  vehiclesFuelLogsPage.navigateTo("Fleet", "Vehicles Fuel Logs");
+        vehiclesFuelLogsPage.navigateTo("Fleet", "Vehicles Fuel Logs");
 
         String expectedTitle = "Vehicle Fuel Logs - Entities - System - Car - Entities - System";
         String actualTitle = Driver.getDriver().getTitle();

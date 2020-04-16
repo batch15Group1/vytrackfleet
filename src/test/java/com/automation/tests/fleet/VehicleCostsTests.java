@@ -9,38 +9,39 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class VehicleCostsTests extends AbstractTestBase {
-//UserStory #5 /AC #1 /Test Case #1
+    //UserStory #5 /AC #1 /Test Case #1
     //1.Verify that truck driver should be able to see all cars' cost informations on the Vehicle Costs page.
-  //Test Case #1 Truck driver can see cost information
+    //Test Case #1 Truck driver can see cost information
 //    5.Click  Create Vehicle Cost button
 //    6.Put the informations
 //    7. Click Save button
     @Test
-    public void testCreateVehicleCost(){
+    public void testCreateVehicleCost() {
         LoginPage loginPage = new LoginPage();
         VehicleCostsPage vehicleCostsPage = new VehicleCostsPage();
 
-        loginPage.login("User1","UserUser123");
-        vehicleCostsPage.navigateTo("Fleet","Vehicle Costs");
+        loginPage.login("User1", "UserUser123");
+        vehicleCostsPage.navigateTo("Fleet", "Vehicle Costs");
         String actualResult = Driver.getDriver().findElement(By.className("oro-subtitle")).getText();
         String expectedResult = "Vehicle Costs";
 
-        Assert.assertEquals(actualResult,expectedResult);
+        Assert.assertEquals(actualResult, expectedResult);
 
-        }
-        //US2/AC2/TC1
-        @Test
-    public void createNewCost() throws InterruptedException {
-            LoginPage loginPage = new LoginPage();
-            VehicleCostsPage vehicleCostsPage = new VehicleCostsPage();
-
-            loginPage.login("User1","UserUser123");
-            vehicleCostsPage.navigateTo("Fleet","Vehicle Costs");
-
-            wait();
-vehicleCostsPage.clickToCreateVehicleCost();
-            wait();
-vehicleCostsPage.putTheCostInfo();
-        }
     }
+
+    //US2/AC2/TC1
+    @Test
+    public void createNewCost() throws InterruptedException {
+        LoginPage loginPage = new LoginPage();
+        VehicleCostsPage vehicleCostsPage = new VehicleCostsPage();
+
+        loginPage.login("User1", "UserUser123");
+        vehicleCostsPage.navigateTo("Fleet", "Vehicle Costs");
+
+        wait();
+        vehicleCostsPage.clickToCreateVehicleCost();
+        wait();
+        vehicleCostsPage.putTheCostInfo();
+    }
+}
 

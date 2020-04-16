@@ -25,7 +25,7 @@ public class VehiclesFuelLogsPage  extends AbstractPageBase {
     @FindBy (xpath = "//div[@class='flash-messages-holder']//div[2]//div")
     private WebElement alertMessageForUnauthorized;
 
-    //====== US 10
+    // US 10
 
     @FindBy(xpath = "//tbody[@class='ui-sortable']/tr")
     private List<WebElement> vehicleFuelLogGridInfoNames;
@@ -42,7 +42,7 @@ public class VehiclesFuelLogsPage  extends AbstractPageBase {
     @FindBy(xpath = "//div[@class='pull-left btn-group icons-holder']")
     private WebElement cancelBtn;
 
-    //US10 AC3
+    // US10 AC3
     @FindBy(xpath = "//a[@class='dropdown-toggle' and text()='...']")
     private List<WebElement> dots3list;
 
