@@ -121,10 +121,10 @@ public class VehiclesPage extends AbstractPageBase {
     @FindBy(className = "color")
     private List<WebElement> colors;
 
-    @FindBy(css = "[id^=\"s2id_oro_calendar_event_form_attendees-uid\"]")
+    @FindBy(xpath = "(//label[text()='Guests']/../..//input)[1]")
     private WebElement guestTextBox;
 
-    @FindBy(id = "oro_calendar_event_form_reminders-uid-5e95fa15e7450_collection")
+    @FindBy(css = "[id^='oro_calendar_event_form_reminders']")
     private WebElement addRemainderBtn;
 
     @FindBy(css = "[class=\"btn add-list-item\"]")
