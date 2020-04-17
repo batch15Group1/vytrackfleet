@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.xml.xpath.XPath;
+import java.util.List;
 
 public class VehicleCostsPage extends AbstractPageBase {
 //    5.Click  Create Vehicle Cost button
@@ -45,7 +45,9 @@ private WebElement selectDate;
         costDescription.sendKeys("Test Cost Created");
     }
 
-
+    public List<WebElement> costsList(){
+        return Driver.getDriver().findElements(   By.cssSelector( "[class='grid-row row-click-action']" )   );
+    }
 
 }
 
