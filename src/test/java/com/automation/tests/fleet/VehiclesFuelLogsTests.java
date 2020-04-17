@@ -18,7 +18,11 @@ import java.util.Set;
 
 public class VehiclesFuelLogsTests extends AbstractTestBase {
 
-
+/*
+  US 9.As an authorized user I should be able to access Vehicle Fuel logs
+  AC 1.Verify that only authorized user can access Vehicle Fuel logs (Note: authorized user: truck driver )
+     2.Verify that non authorized user should not be able to access Vehicle Fuel Logs
+ */
     @Test(dataProvider = "credentialsForAuthorizedUser")
     public void accessVehicleFuelLog(String userName, String password) {
 
@@ -81,6 +85,14 @@ public class VehiclesFuelLogsTests extends AbstractTestBase {
 
     }
 
+    /*
+    US  10.As a truck driver I should be able to access Vehicle Fuel Logs
+    AC  1.Verify that truck driver should be able to see all Vehicle Fuel information on the grid
+        2.Verify that truck driver should be able to create Vehicle Fuel logs or cancel it
+        3.Verify that truck driver should be able to Edit , delete Vehicle Fuel Logs or
+            add attachment , add event
+        4.Verify that truck driver should be able to reset the grid by clicking on Grid setting
+     */
     @Test
     public void allVehicleFuelLogInfo(){
         test = report.createTest("Verify all vehicle fuel log grid information");
@@ -108,7 +120,7 @@ public class VehiclesFuelLogsTests extends AbstractTestBase {
         test = report.createTest("Verify create vehicle fuel logs or cancel ");
         LoginPage loginPage = new LoginPage();
         loginPage.loginAsDriver();
-        test.info("Login as truck driver for US 10 AC 2");
+
 
         VehiclesFuelLogsPage vehiclesFuelLogsPage = new VehiclesFuelLogsPage();
         vehiclesFuelLogsPage.navigateTo("Fleet", "Vehicles Fuel Logs");
@@ -127,24 +139,35 @@ public class VehiclesFuelLogsTests extends AbstractTestBase {
         String actualTitle2 = Driver.getDriver().getTitle();
         BrowserUtils.wait(3);
         Assert.assertEquals(actualTitle2, expectedTitle2);
-
+         test.pass("Create all VFL or cancel is verified ");
 
 
     }
     @Test
-    public void editDeleteVLPaddAttchEvent(){
+    public void editDeleteVLPaddAttchAddEvent(){
+        //couldn't find add attachment add event part in the page
 
-        //test = report.createTest("Verify create vehicle fuel logs or cancel ");
+        test = report.createTest("Verify create vehicle fuel logs or cancel ");
         LoginPage loginPage = new LoginPage();
         loginPage.loginAsDriver();
-       // test.info("Login as truck driver for US 10 AC 2");
+
 
         VehiclesFuelLogsPage vehiclesFuelLogsPage = new VehiclesFuelLogsPage();
         vehiclesFuelLogsPage.navigateTo("Fleet", "Vehicles Fuel Logs");
 
-        vehiclesFuelLogsPage.hoverOverDots();
+        vehiclesFuelLogsPage.editFuelLog();
+        String URL=vehiclesFuelLogsPage.getCurrentURL();
+        String targetURL="https://qa2.vytrack.com/entity/update/Extend_Entity_VehicleFuelLogs";
+        Assert.assertTrue(URL.startsWith(targetURL));
 
-        //   not ready yet  ??????
+        Driver.getDriver().navigate().back();
+
+        vehiclesFuelLogsPage.deleteFuelLog();
+        String deleteButtonText=vehiclesFuelLogsPage.getDeleteButton();
+
+        Assert.assertEquals(deleteButtonText,"Yes, Delete");
+
+        test.pass("VFL edit and delete functions are verified");
 
 
 
@@ -153,10 +176,9 @@ public class VehiclesFuelLogsTests extends AbstractTestBase {
     }
     @Test
     public void resetGrid(){
-        //test = report.createTest("Verify create vehicle fuel logs or cancel ");
+        test = report.createTest("Verify that reset grid for VFL ");
         LoginPage loginPage = new LoginPage();
         loginPage.loginAsDriver();
-        // test.info("Login as truck driver for US 10 AC 2");
 
         VehiclesFuelLogsPage vehiclesFuelLogsPage = new VehiclesFuelLogsPage();
         vehiclesFuelLogsPage.navigateTo("Fleet", "Vehicles Fuel Logs");
@@ -164,7 +186,7 @@ public class VehiclesFuelLogsTests extends AbstractTestBase {
         BrowserUtils.wait(2);
         vehiclesFuelLogsPage.resetVFL();
 
-
+    test.pass("VFL reset grid is verified");
 
     }
 
