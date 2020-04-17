@@ -1,5 +1,6 @@
-package com.automation.pages;
+package com.automation.pages.login;
 
+import com.automation.utilities.AbstractPageBase;
 import com.automation.utilities.BrowserUtils;
 import com.automation.utilities.ConfigurationReader;
 import com.automation.utilities.Driver;
@@ -8,11 +9,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+public class LoginPage extends AbstractPageBase {
 
     @FindBy(id = "prependedInput")
     private WebElement username;
-//    public WebElement username2 = Driver.getDriver().findElement(By.id("prependedInput"));
 
     @FindBy(id = "prependedInput2")
     private WebElement password;
@@ -20,16 +20,19 @@ public class LoginPage {
     @FindBy(id = "_submit")
     private WebElement login;
 
+
     @FindBy(linkText = "Forgot your password?")
     private WebElement forgotPassword;
 
     @FindBy (css= "[class='alert alert-error']")
     private WebElement warningMessage;
 
+    /*
+     to connect our webDriver, page class and page factory
+     PageFactory - used to use @FindBy annotations
+     PageFactory - helps to find elements easier
+     */
     public LoginPage() {
-        //to connect our webdriver, page class and page factory
-        //PageFactory - used to use @FindBy annotations
-        //PageFactory - helps to find elements easier
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
@@ -55,6 +58,24 @@ public class LoginPage {
      * Credentials will be retrieved from configuration.properties file
      */
     public void login(){
+        username.sendKeys(ConfigurationReader.getProperty("store_manager"));
+        password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
+        BrowserUtils.wait(3);
+    }
+
+    public void loginAsDriver(){
+        username.sendKeys(ConfigurationReader.getProperty("driver"));
+        password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
+        BrowserUtils.wait(3);
+    }
+
+    public void loginAsSalesManager(){
+        username.sendKeys(ConfigurationReader.getProperty("sales_manager"));
+        password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
+        BrowserUtils.wait(3);
+    }
+
+    public void loginAsStoreManager(){
         username.sendKeys(ConfigurationReader.getProperty("store_manager"));
         password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
         BrowserUtils.wait(3);

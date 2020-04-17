@@ -1,93 +1,71 @@
 package com.automation.tests.fleet;
 
+import com.automation.pages.fleet.VehiclesPage;
+import com.automation.pages.login.LoginPage;
+import com.automation.utilities.AbstractTestBase;
 import com.automation.utilities.BrowserUtils;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
+import java.util.Set;
 
-public class VehiclesTests {
-    private WebDriver driver;
-    private String URL = "https://qa2.vytrack.com/user/login";
-    //credentials for store manager
-    private String username = "storemanager51";
-    private String password = "UserUser123";
-    private By usernameBy = By.id("prependedInput");
-    private By passwordBy =By.id("prependedInput2");
-    private By loginBtnBy = By.id("_submit");
-    private By fleetBy = By.xpath("//span[@class='title title-level-1' and contains(text(),'Fleet')]");
-    private By subtitleBy = By.className("oro-subtitle");
+public class VehiclesTests extends AbstractTestBase {
 
-   @Test
-    public void verifyPageSubTitle(){
-        //login
-        driver.findElement(usernameBy).sendKeys(username);
-        driver.findElement(passwordBy).sendKeys(password, Keys.ENTER);
-        //put more wait here as well, if didn't click
-        BrowserUtils.wait(5);
-        //click on fleet
-//        driver.findElement(fleetBy).click();
+    // #US1_AC1
+    @Test(description = "driver should be able to see all Vehicle information once navigate to Vehicle page")
+    public void verifyAllVehicleInformation() {
+        test = report.createTest("Verify all vehicle information");
 
-       Actions actions = new Actions(driver);
-       // move to element instead of click
-       actions.moveToElement(driver.findElement(fleetBy)).perform();
-       // perform to execute command
-       // every action should end with perform.
+        LoginPage loginPage = new LoginPage();
+        VehiclesPage vehiclesPage = new VehiclesPage();
+        loginPage.loginAsDriver();
+        test.info("Login as truck driver");
+        vehiclesPage.navigateTo("Fleet", "Vehicles");
+        vehiclesPage.clickOnGridSettings();
+        vehiclesPage.clickSelectAll();
 
+        Set<String> expected = vehiclesPage.getAllVehicleInfoNamesFromGrid();
+        Set<String> actual = vehiclesPage.getAllVehicleInfoFromTableHeader();
+        Assert.assertEquals(actual, expected);
 
-        BrowserUtils.wait(2);
-        //click on Vehicles
-        driver.findElement(By.linkText("Vehicles")).click();
-        //put more wait time if you are getting Cars, Dashboard...
-        //this application is slooooow...
-        BrowserUtils.wait(5);
-        //find subtitle element
-        WebElement subTitleElement = driver.findElement(subtitleBy);
-        System.out.println(subTitleElement.getText());
+        test.pass("All vehicle information were verified! ");
     }
 
-    @Test
-    public void verifyPageNumber(){
-        WebElement pageNumber=driver.findElement(By.xpath("//input[@value='1']"));
-        assertEquals(pageNumber.getAttribute("value"),"1");
+    // #US1_AC2
+    @Test(description = "when driver click on any car on the grid, system should display general information about the car")
+    public void verifyGeneralInfoText() {
+        test = report.createTest("Verify general information text");
 
-    }
+        LoginPage loginPage = new LoginPage();
+        VehiclesPage vehiclesPage = new VehiclesPage();
+        loginPage.loginAsDriver();
+        test.info("Login as truck driver");
+        vehiclesPage.navigateTo("Fleet", "Vehicles");
 
-    @BeforeMethod
-    public void setup(){
-        WebDriverManager.chromedriver().version("79").setup();
-        driver = new ChromeDriver();
-        driver.get(URL);
-        driver.manage().window().maximize();
-        driver.findElement(usernameBy).sendKeys(username);
-        driver.findElement(passwordBy).sendKeys(password, Keys.ENTER);
-        BrowserUtils.wait(5);
-        Actions actions = new Actions(driver);
-        actions.moveToElement(driver.findElement(fleetBy)).perform();
-        BrowserUtils.wait(2);
-        driver.findElement(By.linkText("Vehicles")).click();
-        BrowserUtils.wait(5);
-    }
+        vehiclesPage.randomlySelectACar();
+        String actual = vehiclesPage.getInfoText();
+        String expected = "General Information";
+        Assert.assertEquals(actual, expected);
 
-    @AfterMethod
-    public void tearDown(){
-        // if WebDriver object alive,
-        if(driver!=null){
-            // close browser, close session
-            driver.quit();
-            // destroy driver object for sure.
-            driver=null;
-        }
+        test.pass("General information is verified! ");
     }
 
 
+    // #US1_AC3
+    @Test(description = "driver can add Event and it should display under Activity tab and General information page as well")
+    public void createEvent() {
+        LoginPage loginPage = new LoginPage();
+        VehiclesPage vehiclesPage = new VehiclesPage();
+        loginPage.loginAsDriver();
+        vehiclesPage.navigateTo("Fleet", "Vehicles");
+        vehiclesPage.randomlySelectACar();
+        vehiclesPage.clickAddEvent();
+        vehiclesPage.enterTitle("Meeting");
+        vehiclesPage.enterDescription("Meeting request with sales manager James Bob");
+        vehiclesPage.selectARandomColor();
+        vehiclesPage.addGuestName();
+        vehiclesPage.addRemainder();
+        vehiclesPage.clickToSave();
+    }
 
 }

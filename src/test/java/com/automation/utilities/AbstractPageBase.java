@@ -1,4 +1,4 @@
-package com.automation.pages;
+package com.automation.utilities;
 import com.automation.utilities.BrowserUtils;
 import com.automation.utilities.Driver;
 import org.openqa.selenium.By;
@@ -24,7 +24,12 @@ public abstract class AbstractPageBase {
     @FindBy (css = "#user-menu > a")
     protected WebElement currentUser;
 
-    public AbstractPageBase() { PageFactory.initElements(driver, this); }
+
+
+    public AbstractPageBase() {
+
+        PageFactory.initElements(driver, this);
+    }
 
     public String getCurrentUserName (){
         BrowserUtils.waitForPageToLoad(10);
@@ -50,8 +55,8 @@ public abstract class AbstractPageBase {
 
         actions.moveToElement(tabElement).
                 pause(2000).
-                click(moduleElement).
-                build().perform();
+                moveToElement(moduleElement)
+                .click().build().perform();
 
         BrowserUtils.wait(4);
 

@@ -4,6 +4,7 @@ import java.util.Properties;
 
 public class ConfigurationReader {
     private static Properties configFile;
+
     static {
         try {
             //location of properties file
@@ -27,6 +28,7 @@ public class ConfigurationReader {
      * @return property value
      */
     public static String getProperty(String keyName) {
+
         return configFile.getProperty(keyName);
     }
 }
