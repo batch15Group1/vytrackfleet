@@ -40,20 +40,33 @@ public class VehicleOdometerPage extends AbstractPageBase {
     @FindBy(xpath = "//input[@name='custom_entity_type[Driver]']")
     private WebElement driver;
 
-    @FindBy(xpath = "//div//button [@class='btn btn-success action-button']")
+    @FindBy(css = "[class='btn-group pull-right'] > button")
     private WebElement saveAndCloseButton;
 
     @FindBy(xpath = "//a[text()='Entities']")
     private WebElement entitiesTitle;
 
 
+   @FindBy(xpath = "//h1[@class='user-name']")
+   private WebElement driverName;
 
+   @FindBy(partialLinkText= "Cancel")
+   private WebElement cancelButton;
 
+    @FindBy(partialLinkText= "Edit")
+    private WebElement editButton;
 
+    @FindBy(partialLinkText= "Delete")
+    private WebElement deleteButton;
 
+    @FindBy(partialLinkText= "Yes, Delete")
+    private WebElement acceptDeleteButton;
 
+    @FindBy(className = "flash-messages-holder")
+    private WebElement deleteAcceptedText;
 
     public  String getTitleVehicleOdometer() {
+        BrowserUtils.wait(3);
         return vehicleOdometerTitle.getText();
     }
 
@@ -69,7 +82,8 @@ public class VehicleOdometerPage extends AbstractPageBase {
 
     public void createVehicleOdometer(String milesValue,String driverName,int month,String year,String day){
         String xpathDay="//a[text()='"+day+"']";
-        wait.until(ExpectedConditions.elementToBeClickable(createVehicleOdometerButton)).click();
+        BrowserUtils.wait(5);
+
         BrowserUtils.wait(10);
         odometerValue.sendKeys(milesValue);
 
@@ -85,13 +99,45 @@ public class VehicleOdometerPage extends AbstractPageBase {
         driver.findElement(By.xpath(xpathDay)).click();
 
         driver.sendKeys(driverName);
+
+
+    }
+    public void clickSaveAndCloseButton() {
         BrowserUtils.wait(2);
-        saveAndCloseButton.submit();
+        wait.until(ExpectedConditions.elementToBeClickable(saveAndCloseButton)).click();
+    }
+
+    public String getDriverName(){
+        BrowserUtils.wait(3);
+        return driverName.getText();
+    }
+
+    public void clickCancelButton(){
+     wait.until(ExpectedConditions.elementToBeClickable(cancelButton)).click();
+    }
+
+    public void clickEditButton(){
+        wait.until(ExpectedConditions.elementToBeClickable(editButton)).click();
 
     }
 
-    public String getEntitiesText(){
-        return entitiesTitle.getText();
+
+    public void clickDeleteButton(){
+        wait.until(ExpectedConditions.elementToBeClickable(deleteButton)).click();
+
+    }
+
+    public void clickAcceptDeleteButton(){
+        wait.until(ExpectedConditions.elementToBeClickable(acceptDeleteButton)).click();
+
+    }
+    public void clickCreateVehicleOdometerButton(){
+        wait.until(ExpectedConditions.elementToBeClickable(createVehicleOdometerButton)).click();
+    }
+
+    public String getDeleteAcceptedMessage(){
+        BrowserUtils.wait(3);
+        return deleteAcceptedText.getText();
     }
 }
 

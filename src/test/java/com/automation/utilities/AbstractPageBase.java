@@ -55,7 +55,7 @@ public abstract class AbstractPageBase {
 
         actions.moveToElement(tabElement).
                 pause(2000).
-                moveToElement(moduleElement)
+                moveToElement(moduleElement).pause(3000)
                 .click().build().perform();
 
         BrowserUtils.wait(4);

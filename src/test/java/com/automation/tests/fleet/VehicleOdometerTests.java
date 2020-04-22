@@ -3,36 +3,35 @@ package com.automation.tests.fleet;
 import com.automation.pages.fleet.VehicleOdometerPage;
 import com.automation.pages.login.LoginPage;
 import com.automation.utilities.AbstractTestBase;
-import com.automation.utilities.BrowserUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 
 
 public class VehicleOdometerTests extends AbstractTestBase {
 
 
-/**
- * Verify that Only truck driver and admin can access to vehicle odometer page
- */
-@Test
-public void verifyTrackUserNavigate(){
-    test = report.createTest("Verify truck driver can navigate to vehicle odometer module");
 
-    LoginPage loginPage = new LoginPage();
-    VehicleOdometerPage vehicleOdometerPage = new VehicleOdometerPage();
-    loginPage.login("user1","UserUser123" );
-    test.info("Login as truck driver");
-    vehicleOdometerPage.navigateTo("Fleet","Vehicle Odometer");
+    /**
+     * Verify that Only truck driver and admin can access to vehicle odometer page
+     */
+    @Test
+    public void verifyTrackUserNavigate() {
+        test = report.createTest("Verify truck driver can navigate to vehicle odometer module");
 
-    String actual=vehicleOdometerPage.getTitleVehicleOdometer();
-    String expected="Vehicles Odometers";
+        LoginPage loginPage = new LoginPage();
+        VehicleOdometerPage vehicleOdometerPage = new VehicleOdometerPage();
+        loginPage.login("user1", "UserUser123");
+        test.info("Login as truck driver");
+        vehicleOdometerPage.navigateTo("Fleet", "Vehicle Odometer");
 
-    Assert.assertEquals(actual,expected);
+        String actual = vehicleOdometerPage.getTitleVehicleOdometer();
+        String expected = "Vehicles Odometers";
 
-    test.pass("Truck driver login successfully");
+        Assert.assertEquals(actual, expected);
 
-}
+        test.pass("Truck driver login successfully");
+
+    }
 
 
     /**
@@ -40,40 +39,40 @@ public void verifyTrackUserNavigate(){
      * with invalid password
      */
 
-@Test
-public void verifyTrackUserNavigateWithInvalidPassword(){
-    test=report.createTest("Verify truck driver can not navigate page with invalid password");
-    LoginPage loginPage = new LoginPage();
-    loginPage.login("user1","wrong" );
-    String actual=loginPage.getWarningMessageText();
-    String expected="Invalid user name or password.";
-    Assert.assertEquals(actual,expected);
+    @Test
+    public void verifyTrackUserNavigateWithInvalidPassword() {
+        test = report.createTest("Verify truck driver can not navigate page with invalid password");
+        LoginPage loginPage = new LoginPage();
+        loginPage.login("user1", "wrong");
+        String actual = loginPage.getWarningMessageText();
+        String expected = "Invalid user name or password.";
+        Assert.assertEquals(actual, expected);
 
-    test.pass("User con not navigate with invalid password");
-}
+        test.pass("User con not navigate with invalid password");
+    }
 
     /**
      * Verify that non autorized user Not able to access Vehicle odometer page
      * as a sales manager
      */
 
-@Test
-public void verifySalesManagerNavigate(){
-    test = report.createTest("Verify salesmanager  driver can not navigate to vehicle odometer module");
+    @Test
+    public void verifySalesManagerNavigate() {
+        test = report.createTest("Verify salesmanager  driver can not navigate to vehicle odometer module");
 
-    LoginPage loginPage = new LoginPage();
-    VehicleOdometerPage vehicleOdometerPage = new VehicleOdometerPage();
-    loginPage.login("salesmanager101","UserUser123" );
-    test.info("Login as salesmanager");
-    vehicleOdometerPage.navigateTo("Fleet","Vehicle Odometer");
+        LoginPage loginPage = new LoginPage();
+        VehicleOdometerPage vehicleOdometerPage = new VehicleOdometerPage();
+        loginPage.login("salesmanager101", "UserUser123");
+        test.info("Login as salesmanager");
+        vehicleOdometerPage.navigateTo("Fleet", "Vehicle Odometer");
 
-    String actual=vehicleOdometerPage.getWarningMessageNone_AuthorizedUser();
-    String expected="You do not have permission to perform this action.";
+        String actual = vehicleOdometerPage.getWarningMessageNone_AuthorizedUser();
+        String expected = "You do not have permission to perform this action.";
 
-    Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
 
-    test.pass("None_AuthorizedUser not be able to access vehicle odometer page");
-}
+        test.pass("None_AuthorizedUser not be able to access vehicle odometer page");
+    }
 
     /**
      * Verify that non autorized user Not able to access Vehicle odometer page
@@ -81,19 +80,19 @@ public void verifySalesManagerNavigate(){
      */
 
     @Test
-    public void verifyStoreManagerNavigate(){
+    public void verifyStoreManagerNavigate() {
         test = report.createTest("Verify storemanager  driver can not navigate to vehicle odometer module");
 
         LoginPage loginPage = new LoginPage();
         VehicleOdometerPage vehicleOdometerPage = new VehicleOdometerPage();
-        loginPage.login("storemanager51","UserUser123" );
+        loginPage.login("storemanager51", "UserUser123");
         test.info("Login as storemanager");
-        vehicleOdometerPage.navigateTo("Fleet","Vehicle Odometer");
+        vehicleOdometerPage.navigateTo("Fleet", "Vehicle Odometer");
 
-        String actual=vehicleOdometerPage.getWarningMessageNone_AuthorizedUser();
-        String expected="You do not have permission to perform this action.";
+        String actual = vehicleOdometerPage.getWarningMessageNone_AuthorizedUser();
+        String expected = "You do not have permission to perform this action.";
 
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
 
         test.pass("None_AuthorizedUser not be able to access vehicle odometer page");
     }
@@ -103,20 +102,19 @@ public void verifySalesManagerNavigate(){
      * on the grid.
      */
     @Test
-    public void verifyDriverSeeInformationOnGrid(){
-    LoginPage loginPage=new LoginPage();
-    VehicleOdometerPage vehicleOdometerPage=new VehicleOdometerPage();
-    loginPage.loginAsDriver();
-    vehicleOdometerPage.navigateTo("Fleet","Vehicle Odometer");
+    public void verifyDriverSeeInformationOnGrid() {
+        LoginPage loginPage = new LoginPage();
+        VehicleOdometerPage vehicleOdometerPage = new VehicleOdometerPage();
+        loginPage.loginAsDriver();
+        vehicleOdometerPage.navigateTo("Fleet", "Vehicle Odometer");
 
-    String actual= vehicleOdometerPage.getHeaderInformationTable();
-    String expected="ODOMETER VALUE\n" +
-            "DATE\n" +
-            "DRIVER\n" +
-            "UNIT\n" +
-            "MODEL";
-    Assert.assertEquals(actual,expected);
-
+        String actual = vehicleOdometerPage.getHeaderInformationTable();
+        String expected = "ODOMETER VALUE\n" +
+                "DATE\n" +
+                "DRIVER\n" +
+                "UNIT\n" +
+                "MODEL";
+        Assert.assertEquals(actual, expected);
 
 
     }
@@ -126,25 +124,98 @@ public void verifySalesManagerNavigate(){
      */
 
     @Test
-    public void verifyDriverCreateVehicleOdometer(){
-        test=report.createTest("Verify Truck driver create vehicle odometer");
+    public void verifyDriverCreateVehicleOdometer() {
+        test = report.createTest("Verify Truck driver create vehicle odometer");
 
-        LoginPage loginPage=new LoginPage();
-        VehicleOdometerPage vehicleOdometerPage=new VehicleOdometerPage();
+        LoginPage loginPage = new LoginPage();
+        VehicleOdometerPage vehicleOdometerPage = new VehicleOdometerPage();
         loginPage.loginAsDriver();
 
-        vehicleOdometerPage.navigateTo("Fleet","Vehicle Odometer");
-        BrowserUtils.wait(3);
+        vehicleOdometerPage.navigateTo("Fleet", "Vehicle Odometer");
 
-        vehicleOdometerPage.createVehicleOdometer("120","newdriver",5,"2020","25");
+        vehicleOdometerPage.clickCreateVehicleOdometerButton();
+        vehicleOdometerPage.createVehicleOdometer("120", "newdriver", 5, "2020", "25");
+        vehicleOdometerPage.clickSaveAndCloseButton();
+        String actual = vehicleOdometerPage.getDriverName().trim();
+        String expected = "newdriver";
 
-        String actual=vehicleOdometerPage.getEntitiesText();
-        String expected="Entities";
-
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
 
         test.pass("Truck driver created vehicle successfully ");
 
     }
-}
 
+    /**
+     * Truck driver should be able to cancel Vehicle Odometer .
+     */
+
+    @Test
+    public void verifyDriverCancelCreateVehicleOdometer() {
+        test = report.createTest("Verify Truck driver cancel create vehicle odometer");
+        LoginPage loginPage = new LoginPage();
+        VehicleOdometerPage vehicleOdometerPage = new VehicleOdometerPage();
+
+        loginPage.loginAsDriver();
+        vehicleOdometerPage.navigateTo("Fleet", "Vehicle Odometer");
+
+        vehicleOdometerPage.clickCreateVehicleOdometerButton();
+
+        vehicleOdometerPage.clickCancelButton();
+
+        String actual = vehicleOdometerPage.getTitleVehicleOdometer();
+        String expected = "Vehicles Odometers";
+
+        Assert.assertEquals(actual, expected);
+
+
+    }
+
+    @Test
+    public void verifyDriverEditVehicleOdometer() {
+        LoginPage loginPage = new LoginPage();
+        VehicleOdometerPage vehicleOdometerPage = new VehicleOdometerPage();
+        loginPage.loginAsDriver();
+
+        vehicleOdometerPage.navigateTo("Fleet", "Vehicle Odometer");
+
+        vehicleOdometerPage.clickCreateVehicleOdometerButton();
+        vehicleOdometerPage.createVehicleOdometer("120", "", 5, "2020", "25");
+        vehicleOdometerPage.clickSaveAndCloseButton();
+
+
+        vehicleOdometerPage.clickEditButton();
+        vehicleOdometerPage.createVehicleOdometer("", "edited driver",5 , "", "");
+
+    }
+
+    /**
+     * Truck driver should be able to delete Vehicle Odometer
+     */
+
+    @Test
+    public void verifyDriverDeleteVehicleOdometer() {
+        LoginPage loginPage = new LoginPage();
+        VehicleOdometerPage vehicleOdometerPage = new VehicleOdometerPage();
+        loginPage.loginAsDriver();
+
+        vehicleOdometerPage.navigateTo("Fleet", "Vehicle Odometer");
+
+
+        vehicleOdometerPage.createVehicleOdometer("120", "newdriver", 5, "2020", "25");
+        vehicleOdometerPage.clickSaveAndCloseButton();
+
+        vehicleOdometerPage.clickDeleteButton();
+
+
+        vehicleOdometerPage.clickAcceptDeleteButton();
+
+        String actual=vehicleOdometerPage.getDeleteAcceptedMessage().substring(1).trim();
+        String expected="Vehicle Odometer deleted";
+
+        Assert.assertEquals(actual,expected);
+
+    }
+
+
+
+}
