@@ -72,5 +72,8 @@ public class VehicleCostsTests extends AbstractTestBase {
         String actual = Driver.getDriver().findElement(By.xpath("//h1[@class='user-name']")).getText();
         Assert.assertTrue(actual.contains("Item"));
     }
+
+    //4. Verify that truck driver should be able to add Attachement on General information page by click on any of the car on the grid.
+
 }
 
