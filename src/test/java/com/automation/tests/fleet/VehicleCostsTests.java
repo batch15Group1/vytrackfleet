@@ -28,7 +28,7 @@ public class VehicleCostsTests extends AbstractTestBase {
     //2.Verify that truck driver should be able to create and cancel Vehicle cost.
     //#1 cancel
     @Test
-    public void testCreateVehicleCost() {
+    public void testCreateVehicleCostCancellation () {
         LoginPage loginPage = new LoginPage();
         VehicleCostsPage vehicleCostsPage = new VehicleCostsPage();
         loginPage.login("User1", "UserUser123");
@@ -51,13 +51,26 @@ public class VehicleCostsTests extends AbstractTestBase {
         loginPage.login("User1", "UserUser123");
         vehicleCostsPage.navigateTo("Fleet", "Vehicle Costs");
         vehicleCostsPage.clickToCreateVehicleCost();
-        vehicleCostsPage.putTheCostInfo();
-//        String actual =Driver.getDriver().findElement(By.linkText("Create Vehicle Costs")).getText();
-//        String expected = "Create Vehicle Costs";
-//        Assert.assertEquals(expected,actual);
+        //vehicleCostsPage.putTheCostInfo();
+        vehicleCostsPage.clickSaveAndClose();
+        //Driver.getDriver().navigate().back();
+        String actual = Driver.getDriver().findElement(By.xpath("//h1[@class='user-name']")).getText();
+        String expected = "Create Vehicle Costs";
+        Assert.assertEquals(actual, expected);
     }
-
-
-
+//5.Verify that truck driver should be able to edit or delete Vehicle cost
+    @Test
+    public void testAddEvent() {
+        LoginPage loginPage = new LoginPage();
+        VehicleCostsPage vehicleCostsPage = new VehicleCostsPage();
+        loginPage.login("User1", "UserUser123");
+        vehicleCostsPage.navigateTo("Fleet", "Vehicle Costs");
+        vehicleCostsPage.clickToCreateVehicleCost();
+        //vehicleCostsPage.putTheCostInfo();
+        vehicleCostsPage.clickSaveAndClose();
+        vehicleCostsPage.clickAddEvent();
+        String actual = Driver.getDriver().findElement(By.xpath("//h1[@class='user-name']")).getText();
+        Assert.assertTrue(actual.contains("Item"));
+    }
 }
 

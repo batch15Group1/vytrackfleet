@@ -2,14 +2,13 @@ package com.automation.pages.fleet;
 
 import com.automation.utilities.AbstractPageBase;
 import com.automation.utilities.BrowserUtils;
-import com.automation.utilities.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import javax.xml.xpath.XPath;
 
 public class VehicleCostsPage extends AbstractPageBase {
 
@@ -25,7 +24,7 @@ public class VehicleCostsPage extends AbstractPageBase {
     @FindBy(id = "select2-drop-mask")
     private WebElement selectType;
 
-    @FindBy(id = "custom_entity_type_TotalPrice-uid-5e93dcd32021f")
+    @FindBy(xpath = "//input[contains(@id,'TotalPrice')]")
     private WebElement totalPrice;
 
     @FindBy(id = "date_selector_custom_entity_type_Date-uid-5e93dcd32030c")
@@ -38,7 +37,21 @@ public class VehicleCostsPage extends AbstractPageBase {
     private WebElement selectDate;
 
     @FindBy(xpath = "*[@id='select2-drop']/ul[2]/li[1]/div")
-    private WebElement selectCostType;
+    private WebElement costType;
+
+    @FindBy(xpath = "//button[@class='btn btn-success action-button']")
+    private WebElement saveAndCloseBtn;
+
+    @FindBy(xpath = "//a[@title='Add an event to this record']")
+    private WebElement addEventBtn;
+
+    @FindBy(xpath = "//input[@name='oro_calendar_event_form[title]']")
+    private WebElement addEventTitle;
+
+    @FindBy(xpath = "//a[@href='#scroll-2-61'][1]")
+    private WebElement activity;
+
+
 
     public void clickToCreateVehicleCost() {
         //WebDriverWait wait =new WebDriverWait(driver,10);
@@ -52,18 +65,39 @@ public class VehicleCostsPage extends AbstractPageBase {
          wait.until(ExpectedConditions.elementToBeClickable(cancelCreateVehicleCostBtn)).click();
         }
 
+    @FindBy(css = "[name='custom_entity_type[Canberequested]']")
+    private WebElement canBeRequested;
 
+    public void selectCostType(String text) {
+        BrowserUtils.waitForPageToLoad(20);
+        driver.findElement(By.className("select2-chosen")).click();
+        Select slctCanBeRequested = new Select(costType);
+        slctCanBeRequested.selectByVisibleText("Tax Roll");
+    }
     public void putTheCostInfo(){
         WebDriverWait wait =new WebDriverWait(driver,10);
-        selectType.click();
-        selectCostType.click();
-        totalPrice.sendKeys("1000");
-        date.click();
-        selectDate.click();
-        costDescription.sendKeys("Test Cost Created");
+        //selectCostType().click();
+        totalPrice.sendKeys("2020");
+//        date.click();
+//        selectDate.click();
+//        costDescription.sendKeys("Test Cost Created");
     }
 
+    public void clickSaveAndClose(){
+        BrowserUtils.waitForPageToLoad(10);
+        wait.until(ExpectedConditions.elementToBeClickable(saveAndCloseBtn)).click();
+    }
 
+    public void clickAddEvent(){
+        BrowserUtils.waitForPageToLoad(10);
+        wait.until(ExpectedConditions.elementToBeClickable(addEventBtn)).click();
+    }
+    public void clickAddEventTitle() {
+        BrowserUtils.waitForPageToLoad(10);
+        wait.until(ExpectedConditions.elementToBeClickable(addEventTitle)).sendKeys("onuralp");
+        addEventTitle.sendKeys(Keys.ENTER);
+        activity.click();
+    }
 
 }
 
