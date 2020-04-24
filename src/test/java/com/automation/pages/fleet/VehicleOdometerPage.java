@@ -84,7 +84,7 @@ public class VehicleOdometerPage extends AbstractPageBase {
         String xpathDay="//a[text()='"+day+"']";
         BrowserUtils.wait(5);
 
-        BrowserUtils.wait(10);
+
         odometerValue.sendKeys(milesValue);
 
         date.click();
@@ -97,9 +97,16 @@ public class VehicleOdometerPage extends AbstractPageBase {
         selectYear.selectByValue(year);
 
         driver.findElement(By.xpath(xpathDay)).click();
-
         driver.sendKeys(driverName);
+        BrowserUtils.wait(3);
 
+    }
+
+    public void editVehicleOdometer(String newDriverName){
+        BrowserUtils.wait(3);
+        driver.clear();
+        BrowserUtils.wait(3);
+        driver.sendKeys(newDriverName);
 
     }
     public void clickSaveAndCloseButton() {
@@ -108,15 +115,17 @@ public class VehicleOdometerPage extends AbstractPageBase {
     }
 
     public String getDriverName(){
-        BrowserUtils.wait(3);
+        BrowserUtils.wait(5);
         return driverName.getText();
     }
 
     public void clickCancelButton(){
-     wait.until(ExpectedConditions.elementToBeClickable(cancelButton)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(cancelButton)).click();
     }
 
     public void clickEditButton(){
+        BrowserUtils.wait(3);
         wait.until(ExpectedConditions.elementToBeClickable(editButton)).click();
 
     }
@@ -133,6 +142,7 @@ public class VehicleOdometerPage extends AbstractPageBase {
     }
     public void clickCreateVehicleOdometerButton(){
         wait.until(ExpectedConditions.elementToBeClickable(createVehicleOdometerButton)).click();
+        BrowserUtils.wait(3);
     }
 
     public String getDeleteAcceptedMessage(){

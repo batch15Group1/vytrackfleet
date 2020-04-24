@@ -98,11 +98,12 @@ public class VehicleOdometerTests extends AbstractTestBase {
     }
 
     /**
-     * Verify that truck driver should be able to see all vehicle odometer informations
+     * Verify that truck driver should be able to see all vehicle odometer information
      * on the grid.
      */
     @Test
     public void verifyDriverSeeInformationOnGrid() {
+        test = report.createTest("Verify Truck driver see all vehicle odometer information on the grid.");
         LoginPage loginPage = new LoginPage();
         VehicleOdometerPage vehicleOdometerPage = new VehicleOdometerPage();
         loginPage.loginAsDriver();
@@ -115,7 +116,7 @@ public class VehicleOdometerTests extends AbstractTestBase {
                 "UNIT\n" +
                 "MODEL";
         Assert.assertEquals(actual, expected);
-
+        test.pass("Truck driver can see all vehicle odometer information  ");
 
     }
 
@@ -141,7 +142,7 @@ public class VehicleOdometerTests extends AbstractTestBase {
 
         Assert.assertEquals(actual, expected);
 
-        test.pass("Truck driver created vehicle successfully ");
+        test.pass("Truck driver created vehicle odometer successfully ");
 
     }
 
@@ -167,11 +168,13 @@ public class VehicleOdometerTests extends AbstractTestBase {
 
         Assert.assertEquals(actual, expected);
 
+        test.pass("Truck driver canceled creating vehicle odometer successfully");
 
     }
 
     @Test
     public void verifyDriverEditVehicleOdometer() {
+        test = report.createTest("Verify Truck driver edit vehicle odometer");
         LoginPage loginPage = new LoginPage();
         VehicleOdometerPage vehicleOdometerPage = new VehicleOdometerPage();
         loginPage.loginAsDriver();
@@ -179,12 +182,21 @@ public class VehicleOdometerTests extends AbstractTestBase {
         vehicleOdometerPage.navigateTo("Fleet", "Vehicle Odometer");
 
         vehicleOdometerPage.clickCreateVehicleOdometerButton();
-        vehicleOdometerPage.createVehicleOdometer("120", "", 5, "2020", "25");
+        vehicleOdometerPage.createVehicleOdometer("120", "newdriver", 5, "2020", "25");
         vehicleOdometerPage.clickSaveAndCloseButton();
 
 
         vehicleOdometerPage.clickEditButton();
-        vehicleOdometerPage.createVehicleOdometer("", "edited driver",5 , "", "");
+        vehicleOdometerPage.editVehicleOdometer("edited driver");
+        vehicleOdometerPage.clickSaveAndCloseButton();
+
+        String actual = vehicleOdometerPage.getDriverName().trim();
+        String expected = "edited driver";
+
+        Assert.assertEquals(actual, expected);
+
+        test.pass("Truck driver edited vehicle odometer successfully ");
+
 
     }
 
@@ -194,13 +206,14 @@ public class VehicleOdometerTests extends AbstractTestBase {
 
     @Test
     public void verifyDriverDeleteVehicleOdometer() {
+        test = report.createTest("Verify Truck driver delete vehicle odometer");
         LoginPage loginPage = new LoginPage();
         VehicleOdometerPage vehicleOdometerPage = new VehicleOdometerPage();
         loginPage.loginAsDriver();
 
         vehicleOdometerPage.navigateTo("Fleet", "Vehicle Odometer");
 
-
+        vehicleOdometerPage.clickCreateVehicleOdometerButton();
         vehicleOdometerPage.createVehicleOdometer("120", "newdriver", 5, "2020", "25");
         vehicleOdometerPage.clickSaveAndCloseButton();
 
@@ -213,7 +226,7 @@ public class VehicleOdometerTests extends AbstractTestBase {
         String expected="Vehicle Odometer deleted";
 
         Assert.assertEquals(actual,expected);
-
+        test.pass("Truck driver deleted vehicle odometer successfully ");
     }
 
 
